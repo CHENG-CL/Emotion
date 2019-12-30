@@ -39,7 +39,7 @@ def Webp_TO_Gif():
         # Convert the image into P mode but only use 255 colors in the palette out of 256
         im = im.convert('RGB').convert('P', palette = Image.ADAPTIVE, colors=255)
 
-        # Set all pixel values below 128 to 255,
+        # Set all pixel values below 200 to 255,
         # and the rest to 0
         # 边缘阴影调节
         mask = Image.eval(alpha, lambda a: 255 if a <= 200 else 0)
