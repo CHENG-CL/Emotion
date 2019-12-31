@@ -1,14 +1,13 @@
 from webptools import webplib  as webp
 from PIL import Image
-import imageio
 import os
 
-def Webp_TO_Gif():
-    path = "C:/Users/cheng_cl/Desktop/Weibo"
+def Webp_TO_Gif(files):
+    path = files
     if "Weibo" in path:
-        Format_Of_File = "webp"
+        Format_Of_File = "Webp"
     elif "Tieba" in path:
-        Format_Of_File = "png"
+        Format_Of_File = "Png"
     file_list = os.listdir(path + "_" + Format_Of_File)
 
     for file in file_list:
@@ -26,9 +25,11 @@ def Webp_TO_Gif():
             # print(webp.dwebp(old_Name, new_Name + ".png", "-o"))
             webp.dwebp(old_Name, new_Name + ".png", "-o")
 
-        print(new_Name + ".png")
         # https://github.com/mougua/webp2gif/blob/master/webp.py
-        im = Image.open(new_Name + ".png")
+        if "Weibo" in path:
+            im = Image.open(new_Name + ".png")
+        elif "Tieba" in path:
+            im = Image.open(old_Name)
 
         # convert the channel to "RGBA"
         if len(im.split()) != 4:
@@ -50,9 +51,10 @@ def Webp_TO_Gif():
         print(new_Name + ".gif")
         im.save(new_Name + ".gif", transparency=255)
         # delete the png image
-        if os.path.exists(new_Name + ".png"):
-            os.remove(new_Name + ".png")
-        else:
-            print("No such file:%s", old_Name)
-
-Webp_TO_Gif()
+        if "Tieba" not in new_Name:
+            if os.path.exists(new_Name + ".png"):
+                os.remove(new_Name + ".png")
+            else:
+                print("No such file:", old_Name)
+# "Weibo" or "Tieba"
+Webp_TO_Gif("Weibo")
