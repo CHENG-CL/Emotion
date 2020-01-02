@@ -5,13 +5,13 @@ import os
 def Webp_TO_Gif(files):
     path = files
     if "Weibo" in path:
-        Format_Of_File = "Webp"
+        format_Of_File = "Webp"
     elif "Tieba" in path:
         Format_Of_File = "Png"
-    file_list = os.listdir(path + "_" + Format_Of_File)
+    file_List = os.listdir(path + "_" + format_Of_File)
 
-    for file in file_list:
-        old_Name = path + "_" + Format_Of_File + "/" + file
+    for file in file_List:
+        old_Name = path + "_" + format_Of_File + "/" + file
         if os.path.exists(old_Name):
             front, behind = file.split(".", 1)
         else:
